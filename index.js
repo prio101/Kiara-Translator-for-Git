@@ -14,6 +14,14 @@ export const secret = process.env.OPEN_API_KEY;
 export const github_user_token = process.env.GITHUB_USER_TOKEN;
 export const github_base_url = process.env.GITHUB_BASE_URL || 'https://api.github.com';
 export const github_api_version = process.env.GITHUB_API_VERSION || '2022-11-28';
+
+// Github API headers specific for the load
+export const headersLoad = {
+  'Content-Type': 'application/json',
+  'Authorization': `Bearer ${github_user_token}`,
+  'X-Github-Api-Version': github_api_version
+}
+
 // Use routes
 app.use('/api', openaiRoutes);
 app.use('/api/github', githubRoutes);
