@@ -1,4 +1,5 @@
 import axios from "axios";
+import { github_base_url, github_user_token, github_api_version } from "../index.js";
 
 export const signIn = async (req, res) => {
   // hit the github api to get the response with access token
@@ -7,7 +8,16 @@ export const signIn = async (req, res) => {
       message: "Request body can not be empty."
     });
   }
-  res.status(200).json({ data: "Hello World" });
+
+  let response = await axios.get(`${github_base_url}/user`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${github_user_token}`,
+            'X-Github-Api-Version': github_api_version
+        },
+  });
+  
+  res.status(200).json({data: response.data });
 }
 
 
