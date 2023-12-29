@@ -7,12 +7,14 @@ dotenv.config();
 const app = express();
 app.use(bodyParser.json())
 import openaiRoutes from './routes/openaiRoutes.js';
+import githubRoutes from './routes/githubRoutes.js';
 export const completionUrl = process.env.COMPLETION_URL || 'https://api.openai.com/v1/engines/davinci/completions';
 export const model = process.env.MODEL || 'gpt-3.5-turbo';
 export const secret = process.env.OPEN_API_KEY;
 
 // Use routes
 app.use('/api', openaiRoutes);
+app.use('/api/github', githubRoutes);
 
 // Set up the Express app to listen on a specific port
 const port = process.env.PORT || 3000;

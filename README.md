@@ -77,3 +77,10 @@ The project is a simple web application that allows users to create translations
 - [ ] Create a new translation
 - [ ] List all translations
 - [ ] Translate a text to a given language
+
+
+### Version: 0.0.1
+
+- Create the github API collection for the access and write.
+- Create the Service caller for the doing translation task and write the translation in background.
+- Create the Database Saving and fields for the saving.
