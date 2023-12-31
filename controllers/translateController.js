@@ -12,14 +12,14 @@ export const translate_content = async (req, res) => {
     });
   }
 
-  let language = req.body.data.language;
+  let language = req.body.data.lang;
   let message = req.body.data.message;
-
+  console.log(`Translating ${message} to ${language}`)
   let requestData = {
     "messages": [{
       "role": "system",
-      "content": `translate this content to ${language} language:
-        content is ${message}`
+      "content": `translate this to ${language} and write it on ${language}:
+        ${message}`
     }],
     "model": model,
     "stop": "\n"
