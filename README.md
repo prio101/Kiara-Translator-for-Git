@@ -74,10 +74,7 @@ The project is a simple web application that allows users to create translations
 
 ### Features
 
-- [ ] Create a new translation
-- [ ] List all translations
-- [ ] Translate a text to a given language
-
+---
 
 ### Version: 0.0.1
 
