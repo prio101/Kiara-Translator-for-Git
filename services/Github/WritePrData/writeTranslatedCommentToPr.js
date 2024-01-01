@@ -19,3 +19,5 @@ class WriteTranslatedCommentToPr{
         return await axios.post(`${this.baseUrl}/api/github/write-pr-comment`, data);
     }
 }
+
+export default WriteTranslatedCommentToPr;

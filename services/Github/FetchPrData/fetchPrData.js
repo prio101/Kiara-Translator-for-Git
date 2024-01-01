@@ -1,5 +1,7 @@
 import axios from "axios";
 import OpenAiCaller from "../../services/Translate/openAiCaller";
+import WriteTranslatedCommentToPr from "../../services/Github/WritePrData/writeTranslatedCommentToPr";
+import WriteTranslatedReplyToPr from "../../services/Github/WritePrData/writeTranslatedReplyToPr";
 
 class FetchPrData {
   constructor() {

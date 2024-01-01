@@ -20,3 +20,5 @@ class WriteTranslatedReplyToPr{
         return await axios.post(`${this.baseUrl}/api/github/write-pr-reply`, data);
     }
 }
+
+export default WriteTranslatedReplyToPr;
