@@ -1,6 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
+import FetchPrData from './services/Github/FetchPrData/fetchPrData.js';
+import FetchIssuesData from './services/Github/FetchPrData/fetchIssuesData.js';
 // init the configuration environment
 dotenv.config();
 
@@ -26,9 +28,19 @@ export const headersLoad = {
 app.use('/api', openaiRoutes);
 app.use('/api/github', githubRoutes);
 
+
 // Set up the Express app to listen on a specific port
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+  // let fetchPrData = new FetchPrData();
+  // fetchPrData.call('prio101', 'chapakhana', { state: 'open' });
+
+  // to test out issues
+  let issuesService = new FetchIssuesData();
+  // chapakhana
+  issuesService.call({ owner: 'prio101', repo: 'chapakhana', query: { state: 'open' } });
+  // Kiara Unversity
+  // issuesService.call({ owner: 'daijapan', repo: 'kiara-university', query: { state: 'open' } });
 });

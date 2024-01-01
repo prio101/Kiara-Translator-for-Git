@@ -64,6 +64,67 @@ export const getListOfIssues = async (req, res) => {
     res.status(200).json({ data: response.data });
 }
 
+
+// get the list of the repo issues comments
+// param:
+//   - access_token
+//   - username
+//   - repo name
+// return:
+//   - list of issues comments
+// URL: /repos/{owner}/{repo}/issues/comments
+export const getListOfIssueComments = async (req, res) => {
+    // hit the github api to get the response with access token
+
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Request body can not be empty."
+        });
+    }
+    let response = await axios.get(`${github_base_url}/repos/${req.body.data.owner}/${req.body.data.repo}/issues/comments`, {
+        headers: headersLoad,
+    })
+    // get the repo specific issues list
+    res.status(200).json({ data: response.data });
+}
+
+
+// update an issue comment
+// param:
+//   - access_token
+//   - username
+//   - repo name
+//   - comment_id
+//   - comment
+// return:
+//   - updated comment
+// URL: /repos/{owner}/{repo}/issues/comments/{comment_id}
+
+export const updateIssueComment = async (req, res) => {
+    // hit the github api to get the response with access token
+
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Request body can not be empty."
+        });
+    }
+
+    let owner = req.body.data.owner;
+    let repo = req.body.data.repo;
+    let comment_id = req.body.data.comment_id;
+    let comment = req.body.data.body.data;
+    let data = {
+        body: comment
+    }
+
+    let response = await axios.patch(`${github_base_url}/repos/${owner}/${repo}/issues/comments/${comment_id}`, data, {
+        headers: headersLoad
+    })
+    // get the repo specific issues list
+    res.status(200).json({ data: response.data });
+}
+
+
 //===================================================================================================
 // PR Related APIs
 //===================================================================================================

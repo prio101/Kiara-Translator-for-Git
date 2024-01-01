@@ -1,6 +1,6 @@
 import axios from "axios";
 
-class WriteTranslatedReplyToPr{
+class WriteTranslatedReply{
     constructor(){
         this.baseUrl = process.env.BASE_URL || "http://localhost:3000";
     }
@@ -20,3 +20,5 @@ class WriteTranslatedReplyToPr{
         return await axios.post(`${this.baseUrl}/api/github/write-pr-reply`, data);
     }
 }
+
+export default WriteTranslatedReply;
