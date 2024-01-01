@@ -33,32 +33,32 @@ class FetchIssuesData {
                 let getAllIssueComments = await axios.post(`${this.baseUrl}/api/github/list-of-issues-comments`, reqDataForGetAllIssueComments);
                 comments = getAllIssueComments.data.data;
 
-                console.log("comments", comments);
-                comments.map(comment =>{
-                    console.log("comment", comment);
+                comments.map(async comment =>{
                     let openAiCaller = new OpenAiCaller();
                     let reqDataForTranslate = {
                         data: {
                             text: comment.body,
-                            language: "en"
+                            language: "Japanese"
                         }
                     }
-                    let translate = openAiCaller.translateContent(reqDataForTranslate);
+                    let translate = await openAiCaller.translateContent(reqDataForTranslate.data.language, reqDataForTranslate.data.text);
+
+                    console.log("translate", translate.data);
+
                     let reqDataForUpdateIssueComment = {
                         data: {
                             owner: reqData.owner,
                             repo: reqData.repo,
                             comment_id: comment.id,
-                            body: translate.body
+                            body: translate.data
                         }
                     }
-                    console.log("Error is happening here:", reqDataForUpdateIssueComment)
-                    let updateIssueComment = axios.post(`${this.baseUrl}/api/github/update-issue-comment`, reqDataForUpdateIssueComment);
+                    let updateIssueComment = await axios.post(`${this.baseUrl}/api/github/update-issue-comment`, reqDataForUpdateIssueComment);
                     result.push(updateIssueComment);
                 });
             });
         }
-        console.log("comments", result);
+        console.log("comments result:", result);
     }
 
 

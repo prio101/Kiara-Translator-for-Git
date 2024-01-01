@@ -39,5 +39,8 @@ app.listen(port, () => {
 
   // to test out issues
   let issuesService = new FetchIssuesData();
-  issuesService.call({ owner: 'daijapan', repo: 'kiara-university', query: { state: 'open' } });
+  // chapakhana
+  issuesService.call({ owner: 'prio101', repo: 'chapakhana', query: { state: 'open' } });
+  // Kiara Unversity
+  // issuesService.call({ owner: 'daijapan', repo: 'kiara-university', query: { state: 'open' } });
 });

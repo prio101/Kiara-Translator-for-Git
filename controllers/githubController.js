@@ -108,12 +108,17 @@ export const updateIssueComment = async (req, res) => {
             message: "Request body can not be empty."
         });
     }
-    let requestData = {
-        "body": req.body.data.comment
-    };
 
-    let response = await axios.patch(`${github_base_url}/repos/${req.body.data.owner}/${req.body.data.repo}/issues/comments/${req.body.data.comment_id}`, requestData, {
-        headers: headersLoad,
+    let owner = req.body.data.owner;
+    let repo = req.body.data.repo;
+    let comment_id = req.body.data.comment_id;
+    let comment = req.body.data.body.data;
+    let data = {
+        body: comment
+    }
+
+    let response = await axios.patch(`${github_base_url}/repos/${owner}/${repo}/issues/comments/${comment_id}`, data, {
+        headers: headersLoad
     })
     // get the repo specific issues list
     res.status(200).json({ data: response.data });
