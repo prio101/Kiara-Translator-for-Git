@@ -34,5 +34,5 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
   let fetchPrData = new FetchPrData();
-  fetchPrData.call();
+  fetchPrData.call('prio101', 'chapakhana', { state: 'open' });
 });
