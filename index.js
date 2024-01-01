@@ -33,6 +33,8 @@ const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
-  let fetchPrData = new FetchPrData();
-  fetchPrData.call('prio101', 'chapakhana', { state: 'open' });
+  // let fetchPrData = new FetchPrData();
+  // fetchPrData.call('prio101', 'chapakhana', { state: 'open' });
+
+  // to test out 
 });

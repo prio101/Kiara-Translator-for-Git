@@ -29,7 +29,7 @@ class FetchIssuesData {
                 let getAllIssueComments = await axios.post(`${this.baseUrl}/api/github/issue-comments`, reqDataForGetAllIssueComments);
                 let comments = getAllIssueComments.data.data;
                 
-                // save the replies in the db
+                console.log("comments", comments);
             });
         }
     }
