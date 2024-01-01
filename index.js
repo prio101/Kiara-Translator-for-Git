@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import FetchPrData from './services/Github/FetchPrData/fetchPrData.js';
+import FetchIssuesData from './services/Github/FetchPrData/fetchIssuesData.js';
 // init the configuration environment
 dotenv.config();
 
@@ -36,5 +37,7 @@ app.listen(port, () => {
   // let fetchPrData = new FetchPrData();
   // fetchPrData.call('prio101', 'chapakhana', { state: 'open' });
 
-  // to test out 
+  // to test out issues
+  let issuesService = new FetchIssuesData();
+  issuesService.call({ owner: 'daijapan', repo: 'kiara-university', query: { state: 'open' } });
 });
