@@ -1,7 +1,7 @@
 import axios from "axios";
-import OpenAiCaller from "../../services/Translate/openAiCaller";
-import WriteTranslatedCommentToPr from "../../services/Github/WritePrData/writeTranslatedCommentToPr";
-import WriteTranslatedReplyToPr from "../../services/Github/WritePrData/writeTranslatedReplyToPr";
+import OpenAiCaller from "../../Translate/openAiCaller";
+import WriteTranslatedCommentToPr from "../../Github/WritePrData/writeTranslatedCommentToPr";
+import WriteTranslatedReply from "../../Github/WritePrData/WriteTranslatedReply";
 
 class FetchPrData {
   constructor() {
@@ -77,8 +77,8 @@ class FetchPrData {
             }
           }
 
-          let writeTranslatedReplyToPr = new WriteTranslatedReplyToPr();
-          let result = writeTranslatedReplyToPr.writeTranslatedData(reqDataForWriteTranslatedReply);
+          let writeTranslatedReply = new WriteTranslatedReply();
+          let result = writeTranslatedReply.call(reqDataForWriteTranslatedReply);
           // TODO: save the result to DB.
           this.replyIds.push(reply.id);
         });
@@ -95,7 +95,7 @@ class FetchPrData {
         }
 
         let writeTranslatedCommentToPr = new WriteTranslatedCommentToPr();
-        let result = writeTranslatedCommentToPr.writeTranslatedData(this.language, comment.body, reqDataForWriteTranslatedData);
+        let result = writeTranslatedCommentToPr.call(reqDataForWriteTranslatedData);
         // TODO: save result in the db
         this.commentIds.push(reply.id);
       });
@@ -108,3 +108,5 @@ class FetchPrData {
     }
   }
 }
+
+export default FetchPrData;

@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
+import FetchPrData from './services/Github/FetchPrData/fetchPrData.js';
 // init the configuration environment
 dotenv.config();
 
@@ -26,9 +27,12 @@ export const headersLoad = {
 app.use('/api', openaiRoutes);
 app.use('/api/github', githubRoutes);
 
+
 // Set up the Express app to listen on a specific port
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+  let fetchPrData = new FetchPrData();
+  fetchPrData.call();
 });
