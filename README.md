@@ -81,3 +81,6 @@ The project is a simple web application that allows users to create translations
 - Create the github API collection for the access and write.
 - Create the Service caller for the doing translation task and write the translation in background.
 - Create the Database Saving and fields for the saving.
+
+### Service test:
+1. https://drive.google.com/file/d/1zQHm8CPZtILn9owu9pjIsBYIDpukm6AU/view
