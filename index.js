@@ -6,8 +6,13 @@ dotenv.config();
 
 const app = express();
 app.use(bodyParser.json())
+
+
+app.set('view engine', 'ejs');
+
 import openaiRoutes from './routes/openaiRoutes.js';
 import githubRoutes from './routes/githubRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
 export const completionUrl = process.env.COMPLETION_URL || 'https://api.openai.com/v1/engines/davinci/completions';
 export const model = process.env.MODEL || 'gpt-3.5-turbo';
 export const secret = process.env.OPEN_API_KEY;
@@ -26,6 +31,7 @@ export const headersLoad = {
 // Use routes
 app.use('/api', openaiRoutes);
 app.use('/api/github', githubRoutes);
+app.use('/web/admin', adminRoutes);
 
 // Set up the Express app to listen on a specific port
 const port = process.env.PORT || 3000;
@@ -36,7 +42,7 @@ app.listen(port, () => {
   // fetchPrData.call('prio101', 'chapakhana', { state: 'open' });
 
   // to test out issues
-  let issuesService = new FetchIssuesData();
+  //let issuesService = new FetchIssuesData();
   // chapakhana
   //issuesService.call({ owner: 'prio101', repo: 'chapakhana', query: { state: 'open' } });
   // Kiara Unversity
