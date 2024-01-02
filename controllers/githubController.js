@@ -1,5 +1,5 @@
 import axios from "axios";
-import { github_base_url, headersLoad, github_user_token, github_api_version } from "../index.js";
+import { github_base_url, headersLoad } from "../index.js";
 
 
 
@@ -63,6 +63,106 @@ export const getListOfIssues = async (req, res) => {
     // get the repo specific issues list
     res.status(200).json({ data: response.data });
 }
+
+
+// get the list of the repo issues comments
+// param:
+//   - access_token
+//   - username
+//   - repo name
+// return:
+//   - list of issues comments
+// URL: /repos/{owner}/{repo}/issues/comments
+export const getListOfIssueComments = async (req, res) => {
+    // hit the github api to get the response with access token
+
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Request body can not be empty."
+        });
+    }
+    let response = await axios.get(`${github_base_url}/repos/${req.body.data.owner}/${req.body.data.repo}/issues/comments`, {
+        headers: headersLoad,
+    })
+    // get the repo specific issues list
+    res.status(200).json({ data: response.data });
+}
+
+// create an issue comment
+// param:
+//   - access_token
+//   - username
+//   - repo name
+//   - issue_number
+//   - comment
+// return:
+//   - created comment
+// URL: /repos/{owner}/{repo}/issues/{issue_number}/comments
+
+export const createIssueComment = async (req, res) => {
+    // hit the github api to get the response with access token
+
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Request body can not be empty."
+        });
+    }
+
+    let owner = req.body.data.owner;
+    let repo = req.body.data.repo;
+    let issue_number = req.body.data.issue_number;
+    let comment = req.body.data.comment;
+    let data = {
+        body: comment
+    }
+
+    let response = await axios.post(`${github_base_url}/repos/${owner}/${repo}/issues/${issue_number}/comments`, data, {
+        headers: headersLoad
+    })
+    // get the repo specific issues list
+    if(response.status == 201){
+        res.status(201).json({ data: response.data });
+    } else{
+        res.status(500).json({ data: response.data });
+    }
+}
+
+
+// update an issue comment
+// param:
+//   - access_token
+//   - username
+//   - repo name
+//   - comment_id
+//   - comment
+// return:
+//   - updated comment
+// URL: /repos/{owner}/{repo}/issues/comments/{comment_id}
+
+export const updateIssueComment = async (req, res) => {
+    // hit the github api to get the response with access token
+
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Request body can not be empty."
+        });
+    }
+
+    let owner = req.body.data.owner;
+    let repo = req.body.data.repo;
+    let comment_id = req.body.data.comment_id;
+    let comment = req.body.data.body.data;
+    let data = {
+        body: comment
+    }
+
+    let response = await axios.patch(`${github_base_url}/repos/${owner}/${repo}/issues/comments/${comment_id}`, data, {
+        headers: headersLoad
+    })
+    // get the repo specific issues list
+    res.status(200).json({ data: response.data });
+}
+
 
 //===================================================================================================
 // PR Related APIs

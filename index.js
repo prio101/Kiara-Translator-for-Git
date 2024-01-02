@@ -18,6 +18,7 @@ export const github_api_version = process.env.GITHUB_API_VERSION || '2022-11-28'
 // Github API headers specific for the load
 export const headersLoad = {
   'Content-Type': 'application/json',
+  'Accept': 'application/vnd.github.v3+json',
   'Authorization': `Bearer ${github_user_token}`,
   'X-Github-Api-Version': github_api_version
 }
@@ -31,4 +32,13 @@ const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+  // let fetchPrData = new FetchPrData();
+  // fetchPrData.call('prio101', 'chapakhana', { state: 'open' });
+
+  // to test out issues
+  let issuesService = new FetchIssuesData();
+  // chapakhana
+  //issuesService.call({ owner: 'prio101', repo: 'chapakhana', query: { state: 'open' } });
+  // Kiara Unversity
+  //issuesService.call({ owner: 'daijapan', repo: 'kiara-university', query: { state: 'open' } });
 });
