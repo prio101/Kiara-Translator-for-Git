@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
+import expressEjsLayouts from 'express-ejs-layouts';
 // init the configuration environment
 dotenv.config();
 
@@ -9,6 +10,7 @@ app.use(bodyParser.json())
 
 
 app.set('view engine', 'ejs');
+app.use(expressEjsLayouts);
 
 import openaiRoutes from './routes/openaiRoutes.js';
 import githubRoutes from './routes/githubRoutes.js';
