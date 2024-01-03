@@ -40,7 +40,12 @@ app.listen(port, () => {
   // to test out issues
   let issuesService = new FetchIssuesData();
   // chapakhana
-  issuesService.call({ owner: 'prio101', repo: 'chapakhana', query: { state: 'open' } });
+  setInterval(() => {
+    issuesService.call({ owner: 'prio101', repo: 'translation-check', query: { state: 'open' } });  
+   
+  }, 30000)
+   
+  
   // Kiara Unversity
   // issuesService.call({ owner: 'daijapan', repo: 'kiara-university', query: { state: 'open' } });
 });
