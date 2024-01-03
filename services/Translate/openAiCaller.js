@@ -15,12 +15,13 @@ class OpenAiCaller {
   async translateContent(language, message) {
     let reqData = {
       data: {
-        language: language,
+        lang: language,
         message: message
       }
     }
 
-    return await axios.post(`${this.baseUrl}/api/translate`, reqData);
+    let response = await axios.post(`${this.baseUrl}/api/translate`, reqData);
+    return response;
   }
 }
 

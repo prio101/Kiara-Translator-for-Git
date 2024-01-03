@@ -5,7 +5,7 @@ class WriteTranslatedCommentToPr{
         this.baseUrl = process.env.BASE_URL || "http://localhost:3000";
     }
     
-    async writeTranslatedData(language, message, reqData){
+    async call(reqData){
         let data = {
             data: {
                 owner: reqData.owner,

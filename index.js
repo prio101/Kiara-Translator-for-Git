@@ -1,7 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-import expressEjsLayouts from 'express-ejs-layouts';
+import FetchPrData from './services/Github/FetchPrData/fetchPrData.js';
+import FetchIssuesData from './services/Github/FetchPrData/fetchIssuesData.js';
 // init the configuration environment
 dotenv.config();
 
@@ -10,7 +11,7 @@ app.use(bodyParser.json())
 
 
 app.set('view engine', 'ejs');
-app.use(expressEjsLayouts);
+
 
 import openaiRoutes from './routes/openaiRoutes.js';
 import githubRoutes from './routes/githubRoutes.js';
@@ -35,6 +36,7 @@ app.use('/api', openaiRoutes);
 app.use('/api/github', githubRoutes);
 app.use('/web/admin', adminRoutes);
 
+
 // Set up the Express app to listen on a specific port
 const port = process.env.PORT || 3000;
 
@@ -44,9 +46,14 @@ app.listen(port, () => {
   // fetchPrData.call('prio101', 'chapakhana', { state: 'open' });
 
   // to test out issues
-  //let issuesService = new FetchIssuesData();
+  let issuesService = new FetchIssuesData();
   // chapakhana
-  //issuesService.call({ owner: 'prio101', repo: 'chapakhana', query: { state: 'open' } });
+  setInterval(() => {
+    issuesService.call({ owner: 'prio101', repo: 'translation-check', query: { state: 'open' } });  
+   
+  }, 30000)
+   
+  
   // Kiara Unversity
-  //issuesService.call({ owner: 'daijapan', repo: 'kiara-university', query: { state: 'open' } });
+  // issuesService.call({ owner: 'daijapan', repo: 'kiara-university', query: { state: 'open' } });
 });

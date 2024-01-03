@@ -1,7 +1,7 @@
 import axios from "axios";
-import OpenAiCaller from "../../services/Translate/openAiCaller";
-import WriteTranslatedCommentToPr from "../../services/Github/WritePrData/writeTranslatedCommentToPr";
-import WriteTranslatedReplyToPr from "../../services/Github/WritePrData/writeTranslatedReplyToPr";
+import OpenAiCaller from "../../Translate/openAiCaller.js";
+import WriteTranslatedCommentToPr from "../WritePrData/writeTranslatedCommentToPr.js";
+import WriteTranslatedReply from "../WritePrData/writeTranslatedReply.js";
 
 class FetchPrData {
   constructor() {
@@ -43,10 +43,12 @@ class FetchPrData {
         }
       }
       let getAllPrComments = await axios.post(`${this.baseUrl}/api/github/pr-comments`, reqDataForGetAllPrComments);
-      comments  = getAllPrComments.data.data;
+      comments = getAllPrComments.data.data;
     });
-
-    if(comments.length > 0){
+    
+    console.log("comments", comments);
+    if(comments && comments.length > 0){
+      
       comments.map(async (comment) => {
         // get replies for each comment
         let reqDataForGetAllPrReplies = {
@@ -77,8 +79,8 @@ class FetchPrData {
             }
           }
 
-          let writeTranslatedReplyToPr = new WriteTranslatedReplyToPr();
-          let result = writeTranslatedReplyToPr.writeTranslatedData(reqDataForWriteTranslatedReply);
+          let writeTranslatedReply = new WriteTranslatedReply();
+          let result = writeTranslatedReply.call(reqDataForWriteTranslatedReply);
           // TODO: save the result to DB.
           this.replyIds.push(reply.id);
         });
@@ -95,7 +97,7 @@ class FetchPrData {
         }
 
         let writeTranslatedCommentToPr = new WriteTranslatedCommentToPr();
-        let result = writeTranslatedCommentToPr.writeTranslatedData(this.language, comment.body, reqDataForWriteTranslatedData);
+        let result = writeTranslatedCommentToPr.call(reqDataForWriteTranslatedData);
         // TODO: save result in the db
         this.commentIds.push(reply.id);
       });
@@ -108,3 +110,5 @@ class FetchPrData {
     }
   }
 }
+
+export default FetchPrData;

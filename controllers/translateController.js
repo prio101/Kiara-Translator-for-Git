@@ -11,7 +11,7 @@ export const translate_content = async (req, res) => {
       message: "Request body can not be empty, it requires [:language, :message]"
     });
   }
-
+  console.log("req.body", req.body.data.lang)
   let language = req.body.data.lang;
   let message = req.body.data.message;
   console.log(`Translating ${message} to ${language}`)

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-class WriteTranslatedReplyToPr{
+class WriteTranslatedReply{
     constructor(){
         this.baseUrl = process.env.BASE_URL || "http://localhost:3000";
     }
@@ -21,4 +21,4 @@ class WriteTranslatedReplyToPr{
     }
 }
 
-export default WriteTranslatedReplyToPr;
+export default WriteTranslatedReply;
