@@ -112,7 +112,7 @@ export const updateIssueComment = async (req, res) => {
     let owner = req.body.data.owner;
     let repo = req.body.data.repo;
     let comment_id = req.body.data.comment_id;
-    let comment = req.body.data.body.data;
+    let comment = req.body.data.body;
     let data = {
         body: comment
     }
@@ -123,6 +123,32 @@ export const updateIssueComment = async (req, res) => {
     // get the repo specific issues list
     res.status(200).json({ data: response.data });
 }
+
+export const writeIssueComment = async (req, res) => {
+    // hit the github api to get the response with access token
+
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Request body can not be empty."
+        });
+    }
+
+    let owner = req.body.data.owner;
+    let repo = req.body.data.repo;
+    let issue_number = req.body.data.issue_number;
+    let comment = req.body.data.comment;
+    
+    let data = {
+        body: comment
+    }
+
+    let response = await axios.post(`${github_base_url}/repos/${owner}/${repo}/issues/${issue_number}/comments`, data, {
+        headers: headersLoad
+    })
+    // get the repo specific issues list
+    res.status(200).json({ data: response.data });
+}
+
 
 
 //===================================================================================================
