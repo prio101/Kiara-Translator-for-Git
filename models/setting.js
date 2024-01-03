@@ -7,6 +7,10 @@ const Setting = sequelize.define('Setting', {
     expires_at: DataTypes.DATE,
     access_token: DataTypes.STRING,
     repo_name: DataTypes.STRING,
+}, {
+    tableName: 'settings',
+    timestamps: false,
+    underscored: true,
 });
 
 export default Setting;

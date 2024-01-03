@@ -1,0 +1,73 @@
+<!-- Header partial -->
+<%- include('../../partials/admin/header.ejs') %>
+
+<!--
+  Heads up! 👋
+
+  Plugins:
+    - @tailwindcss/forms
+-->
+
+<div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-lg text-center">
+      <h1 class="text-2xl font-bold sm:text-3xl">Settings for the New Application.</h1>
+  
+      <p class="mt-4 text-gray-500">
+        This settings will be needed for the translation work smoothly.
+      </p>
+    </div>
+  
+    <form action="" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
+      <div>
+        <label for="repo_owner" class="sr-only">Language</label>
+        <span class="text-xs font-medium">Language to translated to</span>
+        <div class="relative">
+          <input
+            type="repo_name"
+            class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+            placeholder="Enter language to translate. example: 'Japanese'"
+          />
+        </div>
+      </div>
+      
+      <div>
+        <label for="repo_name" class="sr-only">Select Repo Name</label>
+        <span class="text-xs font-medium">Select Repo Name</span>
+        <div class="relative">
+          <select class="p-3 border border-gray-200 rounded-lg m-0">
+            <option value="settings-repo-id" class="">Repo Name One from database</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label for="timer" class="sr-only">Set Timer</label>
+        <span class="text-xs font-medium">Set the timer: (Default: 5 mins)</span>
+        <div class="relative">
+          <input
+            type="timer"
+            class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+            placeholder="Enter time delay to run the action in mins: example: '5'"
+          />
+        </div>
+      </div>
+  
+      
+  
+      <div class="flex items-center justify-between">
+        <p class="text-sm text-gray-500">
+          Need Help?
+          <a class="underline" href="">Check documentation</a>
+        </p>
+  
+        <button
+          type="submit"
+          class="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
+        >
+          Create Action
+        </button>
+      </div>
+    </form>
+  </div>
+<!-- footer -->
+<%- include('../../partials/admin/footer.ejs') %>

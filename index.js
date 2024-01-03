@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
+import expressLayouts from 'express-ejs-layouts';
 import FetchPrData from './services/Github/FetchPrData/fetchPrData.js';
 import FetchIssuesData from './services/Github/FetchPrData/fetchIssuesData.js';
 // init the configuration environment
@@ -8,7 +9,7 @@ dotenv.config();
 
 const app = express();
 app.use(bodyParser.json())
-
+app.use(expressLayouts);
 
 app.set('view engine', 'ejs');
 
@@ -38,7 +39,7 @@ app.use('/web/admin', adminRoutes);
 
 
 // Set up the Express app to listen on a specific port
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
@@ -48,10 +49,9 @@ app.listen(port, () => {
   // to test out issues
   let issuesService = new FetchIssuesData();
   // chapakhana
-  setInterval(() => {
-    issuesService.call({ owner: 'prio101', repo: 'translation-check', query: { state: 'open' } });  
-   
-  }, 30000)
+  // setInterval(() => {
+  //   issuesService.call({ owner: 'prio101', repo: 'translation-check', query: { state: 'open' } });
+  // }, 30000)
    
   
   // Kiara Unversity
