@@ -56,11 +56,13 @@ export const createSetting = async (req, res) => {
 
 export const getAction = async (req, res) => {
     let actions = await TranslationAction.findAll({ include: Setting });
-    res.render('admin/actions/new', { title: 'Actions', actions });
+    let settings = await Setting.findAll();
+    res.render('admin/actions/new', { title: 'Actions', actions, settings });
 }
 
 export const getActionList = async (req, res) => {
     let actions = await TranslationAction.findAll({ include: Setting });
+    
     res.render('admin/actions/index', { title: 'Actions', actions });
 }
 

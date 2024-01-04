@@ -54,8 +54,8 @@
         <span class="text-xs font-medium">Select Repo Name - Repo Owner</span>
         <div class="relative">
           <select name="settingId" class="p-3 border border-gray-200 rounded-lg m-0">
-            <% actions.forEach(action => { %>
-              <option value="<%= action.Setting.id %>" class=""><%= action.Setting.repoName %>-<%= action.Setting.repoOwner %></option>
+            <% settings.forEach(setting => { %>
+              <option value="<%= setting.id %>" class=""><%= setting.repoName %>-<%= setting.repoOwner %></option>
             <% }) %>            
           </select>
         </div>
