@@ -20,7 +20,19 @@ TranslationAction.init(
     title: {
       type: DataTypes.STRING,
       allowNull: false,
-    },    
+    },
+    language: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    delay: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    nextRun: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },   
   },
   {
     sequelize, // Pass the sequelize instance

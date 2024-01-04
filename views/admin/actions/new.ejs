@@ -9,8 +9,18 @@
         This Action will be needed for the translation work smoothly.
       </p>
     </div>
+
+    <% if (locals.errors && locals.errors.length > 0) { %>
+      <div class="mt-8 mx-auto max-w-md text-center">
+        <ul class="space-y-4">
+          <% locals.errors.forEach(function(error) { %>
+            <li class="text-sm text-red-500"><%= error %></li>
+          <% }); %>
+        </ul>
+      </div>
+    <% } %>
   
-    <form action="" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
+    <form action="/web/admin/actions/create" method="post" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
       <div>
         <label for="language" class="sr-only">Language</label>
         <span class="text-xs font-medium">Language to translated to</span>
@@ -40,10 +50,10 @@
       </div>
       
       <div>
-        <label for="repo_name" class="sr-only">Select Repo Name</label>
+        <label for="settingId" class="sr-only">Select Repo Name</label>
         <span class="text-xs font-medium">Select Repo Name - Repo Owner</span>
         <div class="relative">
-          <select class="p-3 border border-gray-200 rounded-lg m-0">
+          <select name="settingId" class="p-3 border border-gray-200 rounded-lg m-0">
             <% actions.forEach(action => { %>
               <option value="<%= action.Setting.id %>" class=""><%= action.Setting.repoName %>-<%= action.Setting.repoOwner %></option>
             <% }) %>            
@@ -52,10 +62,11 @@
       </div>
 
       <div>
-        <label for="timer" class="sr-only">Set Timer</label>
+        <label for="delay" class="sr-only">Set Timer</label>
         <span class="text-xs font-medium">Set the timer: (Default: 5 mins)</span>
         <div class="relative">
           <input
+            name="delay"
             type="number"
             class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
             placeholder="Enter time delay to run the action in mins: example: '5'"

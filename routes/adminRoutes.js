@@ -19,7 +19,8 @@ router.post('/settings/create', createSetting)
 router.get('/actions/new', getAction)
 router.get('/actions', getActionList)
 router.post('/actions/create', createAction)
-// Define routes for the Github Application
+
+// For Database Syncing and ops
 router.post('/sync', postSync);
 router.post('/seed', postSeed);
 

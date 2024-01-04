@@ -70,16 +70,22 @@ export const getActionList = async (req, res) => {
 // req.body.settingId
 
 export const createAction = async (req, res) => {
-    if(!req.body.title || !req.body.settingId){
+    if(!req.body.title || !req.body.settingId || !req.body.language || !req.body.delay){
         res.render('admin/actions/new', { title: 'Actions', error: "Please fill in all the fields" });
     }
-    let { title, settingId } = req.body;    
+    let { title, settingId, language, delay } = req.body;    
+    console.log("body",req.body)
+    
     try {
-        let action = await TranslationAction.create({
+        await TranslationAction.create({
             title: title,
-            settingId: settingId
+            settingId: settingId,
+            language: language,
+            delay: delay,
         });
-        res.render('admin/actions', { title: 'Actions', action: action });
+
+        let actions = await TranslationAction.findAll({ include: Setting });
+        res.render('admin/actions/index', { actions });
     }catch{
         res.render('admin/actions/new', { title: 'Actions', errors: ["Could not create the Action."] });
     }
