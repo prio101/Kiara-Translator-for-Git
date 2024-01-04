@@ -10,6 +10,7 @@ dotenv.config();
 
 const app = express();
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressLayouts);
 
 app.set('view engine', 'ejs');
@@ -40,7 +41,7 @@ app.use('/web/admin', adminRoutes);
 
 
 // Set up the Express app to listen on a specific port
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 
 
 // Initialize the database connection

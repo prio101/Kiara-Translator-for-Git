@@ -16,8 +16,33 @@ export const getSetting = (req, res) => {
     res.render('admin/settings/new', { title: 'Settings' });
 }
 
+// create a new setting
+// param: 
+// req.body.title
+// req.body.repoName
+// req.body.repoOwner
+// req.body.accessToken
+// req.body.openAiSecret
+
 export const createSetting = async (req, res) => {
-    res.render('admin/settings/new', { title: 'Settings' });
+    console.log("Creating a new setting", req.body)
+    if(!req.body.title || !req.body.repoName || !req.body.repoOwner || !req.body.accessToken || !req.body.openAiSecret){
+        res.render('admin/settings/new', { title: 'Settings', error: "Please fill in all the fields" });
+    }
+    let { title, repoName, repoOwner, accessToken, openAiSecret } = req.body;
+    console.log(title, repoName, repoOwner, accessToken, openAiSecret)
+    try {
+        let setting = await Setting.create({
+            title: title,
+            repoName: repoName,
+            repoOwner: repoOwner,
+            accessToken: accessToken,
+            openAiSecret: openAiSecret
+        });
+        res.render('admin/settings', { title: 'Settings', setting: setting });
+    }catch{
+        res.render('admin/settings/new', { title: 'Settings', errors: ["Could not create the Setting."] });
+    }
 }
 
 
@@ -35,12 +60,13 @@ export const getSync = async (req, res) => {
         let settings = await Setting.findAll();
         res.status(200).json({data: "Updated the schema successfully", settings: settings});
     } catch (error) {
-        Setting.sync({ alter: true });
         res.status(500).json({ error: error.message });
     }
 }
 
-
+// API endpoint to enlist the seeders file function from /seed/**.js 
+// and run the function to seed the database.
+// For quicker demonstration.
 export const postSeed = async (req, res) => {
     try {
         let result = await seedSettings();
