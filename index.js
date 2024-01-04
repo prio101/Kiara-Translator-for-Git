@@ -11,8 +11,7 @@ const app = express();
 app.use(bodyParser.json())
 import openaiRoutes from './routes/openaiRoutes.js';
 import githubRoutes from './routes/githubRoutes.js';
-import { Sequelize } from 'sequelize';
-
+import adminRoutes from './routes/adminRoutes.js';
 
 export const completionUrl = process.env.COMPLETION_URL || 'https://api.openai.com/v1/engines/davinci/completions';
 export const model = process.env.MODEL || 'gpt-3.5-turbo';
@@ -31,6 +30,7 @@ export const headersLoad = {
 // Use routes
 app.use('/api', openaiRoutes);
 app.use('/api/github', githubRoutes);
+app.use('/web/admin', adminRoutes);
 
 
 // Set up the Express app to listen on a specific port
@@ -38,21 +38,21 @@ const port = process.env.PORT || 3000;
 
 
 // Initialize the database connection
-const sequelize = new Sequelize('','' ,'', {
-  dialect: 'sqlite',
-  storage: path.resolve('db', 'database.sqlite'),
-  logging: (...msg) => console.log(msg)
-})
+// export const sequelize = new Sequelize('','' ,'', {
+//   dialect: 'sqlite',
+//   storage: path.resolve('db', 'database.sqlite'),
+//   logging: (...msg) => console.log(msg)
+// })
 
 app.listen(port, async () => {
   console.log(`Server is running on port ${port}`);
 
-  try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully, to the database.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
+  // try {
+  //   await sequelize.authenticate();
+  //   console.log('Connection has been established successfully, to the database.');
+  // } catch (error) {
+  //   console.error('Unable to connect to the database:', error);
+  // }
   // let fetchPrData = new FetchPrData();
   // fetchPrData.call('prio101', 'chapakhana', { state: 'open' });
 
