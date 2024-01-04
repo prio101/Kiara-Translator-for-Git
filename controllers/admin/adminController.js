@@ -1,4 +1,5 @@
 import Setting from '../../models/setting.js';
+import TranslationAction from '../../models/translationAction.js';
 import { seedSettings } from '../../seeds/settings.js';
 
 
@@ -55,11 +56,14 @@ export const getAction = (req, res) => {
 // Responsible for the Syncing of the database
 // With Model Attributes.
 // Should be ran after any Migration Changes happened into the model schema.
-export const getSync = async (req, res) => {
+export const postSync = async (req, res) => {
+    console.log("Syncing the database")
     try {
-        Setting.sync({ alter: true });
+        Setting.sync({ force: true });
+        TranslationAction.sync({ force: true });
         let settings = await Setting.findAll();
-        res.status(200).json({data: "Updated the schema successfully", settings: settings});
+        let actions = await TranslationAction.findAll();
+        res.status(200).json({ data: "Updated the schema successfully", results: { actions, settings } });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
