@@ -1,41 +1,50 @@
 <!-- Header partial -->
 <%- include('../../partials/admin/header.ejs') %>
 
-<!--
-  Heads up! 👋
-
-  Plugins:
-    - @tailwindcss/forms
--->
-
 <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-lg text-center">
-      <h1 class="text-2xl font-bold sm:text-3xl">Settings for the New Application.</h1>
+      <h1 class="text-2xl font-bold sm:text-3xl">Action for the Setting</h1>
   
       <p class="mt-4 text-gray-500">
-        This settings will be needed for the translation work smoothly.
+        This Action will be needed for the translation work smoothly.
       </p>
     </div>
   
     <form action="" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
       <div>
-        <label for="repo_owner" class="sr-only">Language</label>
+        <label for="language" class="sr-only">Language</label>
         <span class="text-xs font-medium">Language to translated to</span>
         <div class="relative">
           <input
-            type="repo_name"
+            name="language"
+            type="text"
             class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
             placeholder="Enter language to translate. example: 'Japanese'"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label for="title" class="sr-only">Title</label>
+        <span class="text-xs font-medium">Title</span>
+        <div class="relative">
+          <input
+            name="title"
+            type="text"
+            class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+            placeholder="Title for the action. example: 'Translate to Japanese for Repo"
           />
         </div>
       </div>
       
       <div>
         <label for="repo_name" class="sr-only">Select Repo Name</label>
-        <span class="text-xs font-medium">Select Repo Name</span>
+        <span class="text-xs font-medium">Select Repo Name - Repo Owner</span>
         <div class="relative">
           <select class="p-3 border border-gray-200 rounded-lg m-0">
-            <option value="settings-repo-id" class="">Repo Name One from database</option>
+            <% actions.forEach(action => { %>
+              <option value="<%= action.Setting.id %>" class=""><%= action.Setting.repoName %>-<%= action.Setting.repoOwner %></option>
+            <% }) %>            
           </select>
         </div>
       </div>
@@ -45,7 +54,7 @@
         <span class="text-xs font-medium">Set the timer: (Default: 5 mins)</span>
         <div class="relative">
           <input
-            type="timer"
+            type="number"
             class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
             placeholder="Enter time delay to run the action in mins: example: '5'"
           />

@@ -10,8 +10,6 @@ export const getDashboard = (req, res) => {
 
 export const getSettingList = async (req, res) => {
     let settings = await Setting.findAll();
-    console.log(settings);
-    // throw new Error("Something went wrong");
     res.render('admin/settings/index', { title: 'Settings', settings });
 }
 
@@ -47,9 +45,15 @@ export const createSetting = async (req, res) => {
     }
 }
 
+//---------------------------------------------------------------------------------------------
+// ACTIONS
+//---------------------------------------------------------------------------------------------
 
-export const getAction = (req, res) => {
-    res.render('admin/actions/new', { title: 'Actions' });
+// New form for the action
+
+export const getAction = async (req, res) => {
+    let actions = await TranslationAction.findAll({ include: Setting });
+    res.render('admin/actions/new', { title: 'Actions', actions });
 }
 
 export const getActionList = async (req, res) => {
@@ -63,12 +67,10 @@ export const getActionList = async (req, res) => {
 // req.body.settingId
 
 export const createAction = async (req, res) => {
-    console.log("Creating a new action", req.body)
     if(!req.body.title || !req.body.settingId){
         res.render('admin/actions/new', { title: 'Actions', error: "Please fill in all the fields" });
     }
-    let { title, settingId } = req.body;
-    console.log(title, settingId)
+    let { title, settingId } = req.body;    
     try {
         let action = await TranslationAction.create({
             title: title,
