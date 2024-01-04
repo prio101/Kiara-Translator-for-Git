@@ -15,4 +15,10 @@ router.get('/actions/new', getAction)
 
 
 
+import { getSync, postSeed } from '../controllers/adminController.js';
+
+// Define routes for the Github Application
+router.get('/sync', getSync);
+router.post('/seed', postSeed);
+
 export default router;
