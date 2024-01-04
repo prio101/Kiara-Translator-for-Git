@@ -28,12 +28,11 @@ export const getSetting = (req, res) => {
 // req.body.openAiSecret
 
 export const createSetting = async (req, res) => {
-    console.log("Creating a new setting", req.body)
     if(!req.body.title || !req.body.repoName || !req.body.repoOwner || !req.body.accessToken || !req.body.openAiSecret){
         res.render('admin/settings/new', { title: 'Settings', error: "Please fill in all the fields" });
     }
     let { title, repoName, repoOwner, accessToken, openAiSecret } = req.body;
-    console.log(title, repoName, repoOwner, accessToken, openAiSecret)
+    
     try {
         let setting = await Setting.create({
             title: title,
@@ -51,6 +50,34 @@ export const createSetting = async (req, res) => {
 
 export const getAction = (req, res) => {
     res.render('admin/actions/new', { title: 'Actions' });
+}
+
+export const getActionList = async (req, res) => {
+    let actions = await TranslationAction.findAll({ include: Setting });
+    res.render('admin/actions/index', { title: 'Actions', actions });
+}
+
+// create a new action
+// param:
+// req.body.title
+// req.body.settingId
+
+export const createAction = async (req, res) => {
+    console.log("Creating a new action", req.body)
+    if(!req.body.title || !req.body.settingId){
+        res.render('admin/actions/new', { title: 'Actions', error: "Please fill in all the fields" });
+    }
+    let { title, settingId } = req.body;
+    console.log(title, settingId)
+    try {
+        let action = await TranslationAction.create({
+            title: title,
+            settingId: settingId
+        });
+        res.render('admin/actions', { title: 'Actions', action: action });
+    }catch{
+        res.render('admin/actions/new', { title: 'Actions', errors: ["Could not create the Action."] });
+    }
 }
 
 

@@ -1,18 +1,24 @@
 import express from 'express';
 const router = express.Router();
-import { getDashboard, 
-         getAction, 
+import { getDashboard,
          getSetting, 
          createSetting, 
-         getSettingList, postSync, postSeed } from '../controllers/admin/adminController.js';
+         getSettingList,
+         getAction, 
+         getActionList,
+         createAction,
+         postSync, 
+         postSeed } from '../controllers/admin/adminController.js';
 
 // Define routes for the Github Application
 router.get('/dashboard', getDashboard)
 router.get('/settings', getSettingList)
 router.get('/settings/new', getSetting)
 router.post('/settings/create', createSetting)
-router.get('/actions/new', getAction)
 
+router.get('/actions/new', getAction)
+router.get('/actions', getActionList)
+router.post('/actions/create', createAction)
 // Define routes for the Github Application
 router.post('/sync', postSync);
 router.post('/seed', postSeed);
