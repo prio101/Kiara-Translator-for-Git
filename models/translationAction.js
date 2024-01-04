@@ -28,7 +28,7 @@ TranslationAction.init(
   }
 );
 
-TranslationAction.belongsTo(Setting);
+TranslationAction.belongsTo(Setting, { foreignKey: 'settingId' });
 
 // Export the Action class to use in other parts of your application
 export default TranslationAction;

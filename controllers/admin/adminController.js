@@ -1,6 +1,7 @@
 import Setting from '../../models/setting.js';
 import TranslationAction from '../../models/translationAction.js';
 import { seedSettings } from '../../seeds/settings.js';
+import { seedTranslationAction } from '../../seeds/translationActions.js';
 
 
 export const getDashboard = (req, res) => {
@@ -59,8 +60,8 @@ export const getAction = (req, res) => {
 export const postSync = async (req, res) => {
     console.log("Syncing the database")
     try {
-        Setting.sync({ force: true });
-        TranslationAction.sync({ force: true });
+        Setting.sync({ alter: true });
+        TranslationAction.sync({ alter: true });
         let settings = await Setting.findAll();
         let actions = await TranslationAction.findAll();
         res.status(200).json({ data: "Updated the schema successfully", results: { actions, settings } });
@@ -74,8 +75,9 @@ export const postSync = async (req, res) => {
 // For quicker demonstration.
 export const postSeed = async (req, res) => {
     try {
-        let result = await seedSettings();
-        res.status(200).json({data: "Seeded the database successfully", result: result});
+        let settings = await seedSettings();
+        let actions = await seedTranslationAction();
+        res.status(200).json({data: "Seeded the database successfully", results: { actions, settings }});
     }catch{
         res.status(500).json({ error: error.message });
     }

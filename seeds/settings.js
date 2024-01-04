@@ -4,14 +4,16 @@ import Setting from "../models/setting.js";
 
 export const seedSettings = async (req, res) => {
     try {
-        await Setting.create({
-                title: 'Some Name Titile',
-                repoName: 'repoName',
-                repoOwner: 'repoOwner',
-                accessToken: 'accessToken',
-                openAiSecret: 'openAiSecret',
-                
-        })
+        let setting = await Setting.create({
+                            title: 'Some Name Titile',
+                            repoName: 'repoName',
+                            repoOwner: 'repoOwner',
+                            accessToken: 'accessToken',
+                            openAiSecret: 'openAiSecret',
+                            
+                    })
+
+        return setting;
     }
     catch (error) {
         console.error(error.message);
