@@ -11,7 +11,6 @@ import { signIn,
          getListOfPRComments,
          writePRComment,
          createPRReviewReply,
-
          } from '../controllers/githubController.js';
 
 // Define routes for the Github Application

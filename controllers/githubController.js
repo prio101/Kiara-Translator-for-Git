@@ -1,5 +1,5 @@
 import axios from "axios";
-import { github_base_url, headersLoad, github_user_token, github_api_version } from "../index.js";
+import { github_base_url, headersLoad } from "../index.js";
 
 
 
@@ -148,7 +148,6 @@ export const writeIssueComment = async (req, res) => {
     // get the repo specific issues list
     res.status(200).json({ data: response.data });
 }
-
 
 
 //===================================================================================================
