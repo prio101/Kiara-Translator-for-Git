@@ -11,46 +11,26 @@
       <div class="mt-8 sm:mt-12">
         <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <div class="flex flex-col rounded-lg border border-gray-100 px-4 py-8 text-center">
-            <dt class="order-last text-lg font-medium text-gray-500">Total Translation Issues</dt>
+            <dt class="order-last text-lg font-medium text-gray-500">Total Translation Actions</dt>
   
-            <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">450</dd>
-          </div>
-  
-          <div class="flex flex-col rounded-lg border border-gray-100 px-4 py-8 text-center">
-            <dt class="order-last text-lg font-medium text-gray-500">Number of the members</dt>
-  
-            <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">24</dd>
+            <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl"><%= actionsCount %></dd>
           </div>
   
           <div class="flex flex-col rounded-lg border border-gray-100 px-4 py-8 text-center">
             <dt class="order-last text-lg font-medium text-gray-500">Total Repos</dt>
   
-            <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">8</dd>
+            <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl"><%= settingsCount %></dd>
+          </div>
+
+          <div class="flex flex-col rounded-lg border border-gray-100 px-4 py-8 text-center">
+            <dt class="order-last text-lg font-medium text-gray-500">Total Languages</dt>
+  
+            <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl"><%= languagesCount %></dd>
           </div>
         </dl>
       </div>
 
 
-      <div class="mt-8 sm:mt-12">
-        <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <div class="flex flex-col rounded-lg border border-gray-100 px-4 py-8 text-center">
-            <dt class="order-last text-lg font-medium text-gray-500">Most Busy Repo</dt>
-  
-            <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">Kiara University</dd>
-          </div>
-  
-          <div class="flex flex-col rounded-lg border border-gray-100 px-4 py-8 text-center">
-            <dt class="order-last text-lg font-medium text-gray-500">Enqueued Actions</dt>
-  
-            <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">10</dd>
-          </div>
-  
-          <div class="flex flex-col rounded-lg border border-gray-100 px-4 py-8 text-center">
-            <dt class="order-last text-lg font-medium text-gray-500">Total Token Activated</dt>
-  
-            <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">80</dd>
-          </div>
-        </dl>
-      </div>
+      
     </div>
   </section>

@@ -4,8 +4,11 @@ import { seedSettings } from '../../seeds/settings.js';
 import { seedTranslationAction } from '../../seeds/translationActions.js';
 
 
-export const getDashboard = (req, res) => {
-    res.render('admin/dashboard', { title: 'Dashboard' });
+export const getDashboard =async (req, res) => {
+    let settingsCount = await Setting.count();
+    let actionsCount = await TranslationAction.count();
+    let languagesCount = 2;
+    res.render('admin/dashboard', { title: 'Dashboard', settingsCount, actionsCount, languagesCount });
 }
 
 export const getSettingList = async (req, res) => {
