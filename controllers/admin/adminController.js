@@ -7,7 +7,7 @@ import { seedTranslationAction } from '../../seeds/translationActions.js';
 export const getDashboard =async (req, res) => {
     let settingsCount = await Setting.count();
     let actionsCount = await TranslationAction.count();
-    let languagesCount = 2;
+    let languagesCount = await TranslationAction.count({ distinct: true, col: 'language' });
     res.render('admin/dashboard', { title: 'Dashboard', settingsCount, actionsCount, languagesCount });
 }
 
