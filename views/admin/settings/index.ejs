@@ -3,7 +3,11 @@
 
 <div class="m-10">
     <!-- Listing for the settings data -->
-    <%- include('../../partials/admin/list.ejs') %>
+    <% if (settings && settings.length > 0) { %>
+        <%- include('../../partials/admin/list.ejs', { settings }) %>
+        
+    <% } %>
+    
 </div>
 <!-- Footer -->
 <%- include('../../partials/admin/footer.ejs') %>

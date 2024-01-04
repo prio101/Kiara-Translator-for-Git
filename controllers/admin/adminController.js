@@ -9,11 +9,12 @@ export const getDashboard = (req, res) => {
 export const getSettingList = async (req, res) => {
     let settings = await Setting.findAll();
     console.log(settings);
-    res.render('admin/settings/index', { title: 'Settings' });
+    // throw new Error("Something went wrong");
+    res.render('admin/settings/index', { title: 'Settings', settings });
 }
 
 export const getSetting = (req, res) => {
-    res.render('admin/settings/new', { title: 'Settings' });
+    res.render('admin/settings/new', { title: 'Settings', errors: [] });
 }
 
 // create a new setting

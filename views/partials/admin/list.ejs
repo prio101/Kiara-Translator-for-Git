@@ -8,9 +8,10 @@
     <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
       <thead class="ltr:text-left rtl:text-right">
         <tr>
+          <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Title</th>
           <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Repo Name</th>
           <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Repo Owner</th>
-          <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Access Token Present</th>
+          <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Access Token</th>
           <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Open AI Secret</th>
           
           <th class="px-4 py-2"></th>
@@ -18,21 +19,27 @@
       </thead>
   
       <tbody class="divide-y divide-gray-200">
-        <tr class="text-center">
-          <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Name</td>
-          <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Owner</td>
-          <td class="whitespace-nowrap px-4 py-2 text-gray-700">Access Token</td>
-          <td class="whitespace-nowrap px-4 py-2 text-gray-700">Secret</td>
+        <% settings.forEach(setting => { %>
+          <tr class="text-center">
+            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900"><%= setting.title %></td>
+            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900"><%= setting.repoName %></td>
+            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900"><%= setting.repoOwner %></td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700"><%= setting.accessToken ? "Present" : "Not Present" %></td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700"><%= setting.openAiSecret ? "Present" : "Not Present" %></td>
+            
+            <td class="whitespace-nowrap px-4 py-2">
+              <a
+                href="#"
+                class="inline-block rounded bg-red-600 px-4 py-2 text-xs font-medium text-white hover:bg-red-700"
+              >
+                Delete
+              </a>
+            </td>
+          </tr>
+        <% }) %>
           
-          <td class="whitespace-nowrap px-4 py-2">
-            <a
-              href="#"
-              class="inline-block rounded bg-red-600 px-4 py-2 text-xs font-medium text-white hover:bg-red-700"
-            >
-              Delete
-            </a>
-          </td>
-        </tr>
+        
+        
       </tbody>
     </table>
   </div>
