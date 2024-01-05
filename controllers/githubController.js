@@ -1,7 +1,9 @@
 import axios from "axios";
-import { github_base_url } from "../index.js";
+import { github_base_url, github_api_version } from "../index.js";
 
-const headersLoad = (github_user_token) => {
+const github_access_token = process.env.GITHUB_USER_TOKEN;
+
+const headersLoad = (github_user_token = github_access_token) => {
    return {
         'Content-Type': 'application/json',
         'Accept': 'application/vnd.github.v3+json',
