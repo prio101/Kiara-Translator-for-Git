@@ -4,7 +4,7 @@ import OpenAiCaller from "../../Translate/openAiCaller.js";
 class FetchIssuesData {
     constructor(){
         this.baseUrl = process.env.BASE_URL || "http://localhost:3000";
-        this.badge = process.env.BADGE || "Translated Via Github";
+        this.badge = process.env.BADGE || "By Kiara Translator（⌒▽⌒）";
         this.language = process.env.language || 'Japanese'
     }
 
