@@ -1,14 +1,7 @@
-import path from 'path';
 // Import necessary Sequelize modules
-import { DataTypes, Model, Sequelize } from 'sequelize';
-// import sequelize from './your-sequelize-instance'; // Make sure to replace with your Sequelize instance
+import { DataTypes, Model } from 'sequelize';
 import Setting from './setting.js';
-
-export const sequelize = new Sequelize('','' ,'', {
-   dialect: 'sqlite',
-   storage: path.resolve('db', 'database.sqlite'),
-   logging: (...msg) => console.log(msg)
-})
+import { sequelize } from '../db/database.js';
 
 // Define the Action model class
 class TranslationAction extends Model {}

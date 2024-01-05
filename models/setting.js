@@ -1,13 +1,6 @@
-import path from 'path';
 // Import necessary Sequelize modules
-import { DataTypes, Model, Sequelize } from 'sequelize';
-// import sequelize from './your-sequelize-instance'; // Make sure to replace with your Sequelize instance
-
-export const sequelize = new Sequelize('','' ,'', {
-   dialect: 'sqlite',
-   storage: path.resolve('db', 'database.sqlite'),
-   logging: (...msg) => console.log(msg)
-})
+import { DataTypes, Model } from 'sequelize';
+import { sequelize } from '../db/database.js';
 
 // Define the Setting model class
 class Setting extends Model {}

@@ -46,14 +46,6 @@ app.use('/', homeRoutes);
 // Set up the Express app to listen on a specific port
 const port = process.env.PORT || 3000;
 
-
-// Initialize the database connection
-// export const sequelize = new Sequelize('','' ,'', {
-//   dialect: 'sqlite',
-//   storage: path.resolve('db', 'database.sqlite'),
-//   logging: (...msg) => console.log(msg)
-// })
-
 app.listen(port, async () => {
   console.log(`Server is running on port ${port}`);
 
