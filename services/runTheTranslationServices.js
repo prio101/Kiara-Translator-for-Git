@@ -1,6 +1,35 @@
+import Setting from "../models/setting.js";
+import TranslationAction from "../models/translationAction.js";
+import { setNewTime } from "../helpers/utils.js";
+
 const runJob = () => {
     setInterval(() => {
         console.log('runTheTranslationServices');
+        // get the translation actions
+        // for each translation action
+        // check the next run at time
+        // if the next run at time is less than the current time
+        // then run the translation action
+        // update the next run at time
+
+        TranslationAction.findAll({ include: Setting }).then(translationActions => {
+                translationActions.forEach(translationAction => {
+                    let nextRunAt = new Date(translationAction.nextRun);
+                    let currentTime = new Date();                    
+
+                    if (nextRunAt < currentTime || translationAction.nextRun === null) {
+                        // run the translation action
+                        console.log('running the translation action');
+                        // run the translation action
+                        //update the next run at time
+                        translationAction.nextRun = setNewTime(translationAction.delay);                    
+                        translationAction.save();
+                    }
+                }
+            )
+        }).catch(err => {
+            console.log(err);
+        });
     }, 1000);
 }
 
