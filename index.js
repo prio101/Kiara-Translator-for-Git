@@ -5,6 +5,14 @@ import expressLayouts from 'express-ejs-layouts';
 import path from 'path';
 import FetchPrData from './services/Github/FetchPrData/fetchPrData.js';
 import FetchIssuesData from './services/Github/FetchPrData/fetchIssuesData.js';
+
+import openaiRoutes from './routes/openaiRoutes.js';
+import githubRoutes from './routes/githubRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
+import homeRoutes from './routes/homeRoutes.js';
+
+import { runTheTranslationServices } from './services/runTheTranslationServices.js';
+
 // init the configuration environment
 dotenv.config();
 
@@ -16,10 +24,6 @@ app.use(expressLayouts);
 app.set('view engine', 'ejs');
 
 
-import openaiRoutes from './routes/openaiRoutes.js';
-import githubRoutes from './routes/githubRoutes.js';
-import adminRoutes from './routes/adminRoutes.js';
-import homeRoutes from './routes/homeRoutes.js';
 
 export const completionUrl = process.env.COMPLETION_URL || 'https://api.openai.com/v1/engines/davinci/completions';
 export const model = process.env.MODEL || 'gpt-3.5-turbo';
@@ -48,6 +52,7 @@ const port = process.env.PORT || 3000;
 
 app.listen(port, async () => {
   console.log(`Server is running on port ${port}`);
+  runTheTranslationServices();
 
   // try {
   //   await sequelize.authenticate();
