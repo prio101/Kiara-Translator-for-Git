@@ -1,7 +1,14 @@
 import axios from "axios";
-import { github_base_url, headersLoad } from "../index.js";
+import { github_base_url } from "../index.js";
 
-
+const headersLoad = (github_user_token) => {
+   return {
+        'Content-Type': 'application/json',
+        'Accept': 'application/vnd.github.v3+json',
+        'Authorization': `Bearer ${github_user_token}`,
+        'X-Github-Api-Version': github_api_version
+    }
+}
 
 export const signIn = async (req, res) => {
   // hit the github api to get the response with access token
@@ -56,9 +63,10 @@ export const getListOfIssues = async (req, res) => {
     let owner = req.body.data.owner;
     let repo = req.body.data.repo;
     let query_state = req.body.data.query.state;
+    let access_token = req.body.data.accessToken;
     // URL: https://api.github.com/repos/{owner}/{repo}/issues?state={query_state}
     let response = await axios.get(`${github_base_url}/repos/${owner}/${repo}/issues?state=${query_state}`, {
-        headers: headersLoad,
+        headers: headersLoad(access_token),
     })
     // get the repo specific issues list
     res.status(200).json({ data: response.data });
@@ -82,7 +90,7 @@ export const getListOfIssueComments = async (req, res) => {
         });
     }
     let response = await axios.get(`${github_base_url}/repos/${req.body.data.owner}/${req.body.data.repo}/issues/comments`, {
-        headers: headersLoad,
+        headers: headersLoad(req.body.data.accessToken),
     })
     // get the repo specific issues list
     res.status(200).json({ data: response.data });
@@ -113,12 +121,13 @@ export const updateIssueComment = async (req, res) => {
     let repo = req.body.data.repo;
     let comment_id = req.body.data.comment_id;
     let comment = req.body.data.body;
+    let access_token = req.body.data.accessToken;
     let data = {
         body: comment
     }
 
     let response = await axios.patch(`${github_base_url}/repos/${owner}/${repo}/issues/comments/${comment_id}`, data, {
-        headers: headersLoad
+        headers: headersLoad(access_token)
     })
     // get the repo specific issues list
     res.status(200).json({ data: response.data });

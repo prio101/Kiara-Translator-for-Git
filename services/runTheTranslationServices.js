@@ -1,5 +1,6 @@
 import Setting from "../models/setting.js";
 import TranslationAction from "../models/translationAction.js";
+import FetchIssuesData from '../services/Github/FetchPrData/fetchIssuesData.js';
 import { setNewTime } from "../helpers/utils.js";
 
 const runJob = () => {
@@ -20,6 +21,21 @@ const runJob = () => {
                     if (nextRunAt < currentTime || translationAction.nextRun === null) {
                         // run the translation action
                         console.log('running the translation action');
+                        let issuesService = new FetchIssuesData();
+                        // setting run
+                        let settingRepoOwner = translationAction.Setting.repoOwner;
+                        let settingRepoName = translationAction.Setting.repoName;
+                        let settingAccessToken = translationAction.Setting.accessToken;
+                        let settingOpenAiSecret = translationAction.Setting.openAiSecret;
+                        
+                        // call the service
+                        issuesService.call({ owner: settingRepoOwner, 
+                                             repo: settingRepoName,
+                                             accessToken: settingAccessToken,
+                                             openAiSecret: settingOpenAiSecret,
+                                             language: translationAction.language,
+                                             query: { state: 'open' } });
+                        
                         // run the translation action
                         //update the next run at time
                         translationAction.nextRun = setNewTime(translationAction.delay);                    
