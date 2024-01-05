@@ -19,21 +19,23 @@ class FetchIssuesData {
             data: {
                 owner: reqData.owner,
                 repo: reqData.repo,
-                query: reqData.query
+                query: reqData.query,
+                accessToken: reqData.accessToken,
             }
         }
 
         let issues = await axios.post(`${this.baseUrl}/api/github/list-of-issues`, data);
         let comments;
         let result = [];
-        if(issues != null && issues.data != null && issues.data.data != null && issues.data.data.length > 0){
+        if (issues?.data?.data?.length > 0) {
             issues.data.data.map(async (issue) => {
                 // get replies for each comment
                 let reqDataForGetAllIssueComments = {
                   data: {
                     owner: reqData.owner,
                     repo: reqData.repo,
-                    issue_number: issue.id
+                    issue_number: issue.id,
+                    accessToken: reqData.accessToken,
                   }
                 }
                 let getAllIssueComments = await axios.post(`${this.baseUrl}/api/github/list-of-issues-comments`, reqDataForGetAllIssueComments);
@@ -45,7 +47,8 @@ class FetchIssuesData {
                         let reqDataForTranslate = {
                             data: {
                                 text: comment.body,
-                                language: this.language
+                                language: this.language,
+                                openAiSecret: reqData.openAiSecret
                             }
                         }
                         let translate = await openAiCaller.translateContent(reqDataForTranslate.data.language, reqDataForTranslate.data.text);
@@ -58,7 +61,8 @@ class FetchIssuesData {
                                 owner: reqData.owner,
                                 repo: reqData.repo,
                                 comment_id: comment.id,
-                                body: resultString
+                                body: resultString,
+                                accessToken: reqData.accessToken
                             }
                         }
                         let updateIssueComment = await axios.post(`${this.baseUrl}/api/github/update-issue-comment`, reqDataForUpdateIssueComment);
@@ -66,29 +70,6 @@ class FetchIssuesData {
                         
                     }
                 });
-                // comments.map(async comment =>{
-                //     let openAiCaller = new OpenAiCaller();
-                //     let reqDataForTranslate = {
-                //         data: {
-                //             text: comment.body,
-                //             language: "Japanese"
-                //         }
-                //     }
-                //     let translate = await openAiCaller.translateContent(reqDataForTranslate.data.language, reqDataForTranslate.data.text);
-
-                //     console.log("translate", translate.data);
-
-                //     let reqDataForWriteIssueComment = {
-                //         data: {
-                //             owner: reqData.owner,
-                //             repo: reqData.repo,
-                //             issue_number: issue.number,
-                //             comment: translate.data.data
-                //         }
-                //     }
-                //     let writeIssueComment = await axios.post(`${this.baseUrl}/api/github/write-issue-comment`, reqDataForWriteIssueComment);
-                //     result.push(writeIssueComment);
-                // });
             });
         }
         console.log("comments result:", result);

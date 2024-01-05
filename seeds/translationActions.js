@@ -1,13 +1,7 @@
 import TranslationAction from "../models/translationAction.js";
 import Setting from "../models/setting.js";
-
+import { setNewTime } from "../helpers/utils.js";
 // Will Seed the database once called
-
-
-const setNewTime = (delay) => {
-    let date = new Date();
-    return date.setMinutes(date.getMinutes() + delay);
-}
 
 export const seedTranslationAction = async (req, res) => {
     const setting = await Setting.findOne({ where: { id: 1 } });

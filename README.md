@@ -5,8 +5,8 @@ git translation project in upwork in Dec 2023
 ### Install Instructions
 
 1. Clone the repository
-2. Run the docker commands, `docker compose build` and `docker compose up`
-3. Open the browser and go to `http://localhost:3000/`
+2. run `npm run install`
+3. run `npm run dev`
 
 ### Project Structure
 **WIP**
@@ -24,63 +24,9 @@ The project is a simple web application that allows users to create translations
 - BullMQ
 
 
-### API Documentation
+### API Collection:
+[Collection As Link](https://api.postman.com/collections/2329385-74c92df7-44c4-4595-bcff-e83401963536?access_key=PMAT-01HJTK05718KM9CPGA474PYFW5)
 
-1. ```GET /api/translations```
-
-    Returns a list of all translations.
-
-    **Response**
-
-    ```json
-    [
-        {
-            "id": 1,
-            "text": "Hello World",
-            "translations": [
-                {
-                    "id": 1,
-                    "text": "Bonjour le monde",
-                    "language": "French"
-                }
-            ]
-        }
-    ]
-    ```
-
-2. ```POST /api/translations```
-
-    Creates a new translation.
-
-    **Request**
-
-    ```json
-    {
-        "text": "Hello World",
-        "language": "French"
-    }
-    ```
-
-    **Response**
-
-    ```json
-    {
-        "id": 1,
-        "text": "Hello World",
-        "language": "French"
-    }
-    ```
-
-
-### Features
-
----
-
-### Version: 0.0.1
-
-- Create the github API collection for the access and write.
-- Create the Service caller for the doing translation task and write the translation in background.
-- Create the Database Saving and fields for the saving.
 
 ### Service test:
 1. https://drive.google.com/file/d/1zQHm8CPZtILn9owu9pjIsBYIDpukm6AU/view

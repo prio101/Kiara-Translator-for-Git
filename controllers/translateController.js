@@ -14,6 +14,7 @@ export const translate_content = async (req, res) => {
   console.log("req.body", req.body.data.lang)
   let language = req.body.data.lang;
   let message = req.body.data.message;
+  let openAiSecret = req.body.data.openAiSecret;
   console.log(`Translating ${message} to ${language}`)
   let requestData = {
     "messages": [{
@@ -27,7 +28,7 @@ export const translate_content = async (req, res) => {
   axios.post(completionUrl, requestData, {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${secret}`,
+      'Authorization': `Bearer ${openAiSecret || secret}`,
     },
   })
   .then(response => {
