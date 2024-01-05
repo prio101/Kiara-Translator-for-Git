@@ -47,7 +47,7 @@ class FetchIssuesData {
                         let reqDataForTranslate = {
                             data: {
                                 text: comment.body,
-                                language: this.language,
+                                language: reqData.language,
                                 openAiSecret: reqData.openAiSecret
                             }
                         }

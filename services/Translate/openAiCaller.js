@@ -12,7 +12,7 @@ class OpenAiCaller {
     this.baseUrl = process.env.BASE_URL || "http://localhost:3000";
   }
 
-  async translateContent(language, message, openAiSecret) {
+  async translateContent(message, language, openAiSecret) {
     let reqData = {
       data: {
         lang: language,
